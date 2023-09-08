@@ -3,7 +3,6 @@
   hosts: linux
   gather_facts: yes
   become: yes
-  become_user: root
   tasks:
     - name: Update the system
       dnf:
