@@ -1,0 +1,17 @@
+---
+- name: Opret logfil på Windows-serveren
+  hosts: windows_servers
+  gather_facts: false
+  tasks:
+    - name: Opret destination directory hvis den ikke findes
+      win_file:
+        path: "C:\\IT"
+        state: directory
+
+    - name: Opret logfil med dato og klokkeslæt
+      win_shell: |
+        $border = "==============================="
+        $timestamp = Get-Date -Format 'dd-MM-yyyy HH:mm:ss'
+        $content = "Konfigen blev sidst ændret den $timestamp"
+        $border | Out-File -FilePath "C:\\IT\\log.txt" -Append -Encoding unicode
+        $content | Out-File -FilePath "C:\\IT\\log.txt" -Append -Encoding unicode
