@@ -1,6 +1,6 @@
 ---
 - name: Update Fedora Machine with Password
-  hosts: your_target_host
+  hosts: linux
   gather_facts: yes
   become: yes
   become_user: root
