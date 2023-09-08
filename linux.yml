@@ -6,8 +6,11 @@
     - name: Ping the Linux machine
       ping:
   tasks:
-      - name: Update the system
-        dnf:
-          name: "*"
-          state: latest
-        become: yes
+    - name: Update the system
+      dnf:
+        name: "*"
+        state: latest
+      become: yes
+      become_method: sudo
+      become_user: root
+      become_pass: admin123
