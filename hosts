@@ -14,3 +14,5 @@ ensure_become_method=runas
 Router1 ansible_host=172.16.10.1
 SW1 ansible_host=172.16.10.50  
 SW2 ansible_host=172.16.10.51
+
+semaphore user add --admin --login admin123 --name admin123 --email christianhrose@outlook.dk --password admin123
