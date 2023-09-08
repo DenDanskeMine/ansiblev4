@@ -1,0 +1,5 @@
+[user]
+	email = christianhrose@outlook.dk
+	name = Christian Rose
+[safe]
+	directory = /etc/ansible

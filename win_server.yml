@@ -1,0 +1,39 @@
+---
+- name:  Windows Server test
+  hosts: windows_servers
+  gather_facts: yes
+  tasks:
+    - name: tjel om  WinRM er slået til
+      raw: Set-Item -Path 'WSMan:\localhost\Service\Auth\Negotiate' -Value $true
+      become: yes
+      become_method: runas
+      become_user: Administrator
+      ignore_errors: yes
+
+    - name: Check om  C:\Temp findes
+      win_shell: Test-Path -Path "C:\Temp" -PathType Container
+      register: temp_directory_exists
+      become: yes
+      become_method: runas
+      become_user: Administrator
+
+    - name: Lav C:\Temp hvis den ikke findess
+      win_shell: New-Item -Path "C:\Temp" -ItemType Directory
+      when: not temp_directory_exists.stdout
+      become: yes
+      become_method: runas
+      become_user: Administrator
+
+    - name: Lav og sriv en lOgfil i c\twmp
+      win_shell: |
+        $logContent = "Dette er en test." + [System.Environment]::NewLine
+        $logPath = "C:\Temp\Test-fil.txt"
+        Add-Content -Path $logPath -Value $logContent
+      become: yes
+      become_method: runas
+      become_user: Administrator
+
+    # Add more tasks as needed for your specific configuration.
+
+  vars:
+    ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
