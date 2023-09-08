@@ -1,8 +1,12 @@
 ---
-- name: Update Fedora Machine
-  hosts: linux
+- name: Update Fedora Machine with Password
+  hosts: your_target_host
   gather_facts: yes
   become: yes
+  become_user: root
+  vars:
+    ansible_become_pass: admin123  # Replace with your sudo password
+
   tasks:
     - name: Update the system
       dnf:
