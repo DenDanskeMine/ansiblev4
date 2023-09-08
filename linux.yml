@@ -5,3 +5,9 @@
   tasks:
     - name: Ping the Linux machine
       ping:
+  tasks:
+      - name: Update the system
+        dnf:
+          name: "*"
+          state: latest
+        become: yes
