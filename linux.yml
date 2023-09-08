@@ -1,16 +1,11 @@
 ---
-- name: Ping a Linux Machine
-  hosts: linux  # Replace with the hostname or IP address of your Linux machine
-  gather_facts: no         # We don't need to gather facts in this example
-  tasks:
-    - name: Ping the Linux machine
-      ping:
+- name: Update Fedora Machine
+  hosts: linux
+  gather_facts: yes
+  become: yes
+  become_user: root
   tasks:
     - name: Update the system
       dnf:
         name: "*"
         state: latest
-      become: yes
-      become_method: sudo
-      become_user: root
-      become_pass: admin123
