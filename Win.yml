@@ -8,4 +8,3 @@
       win_file:
         path: "C:\\path\\to\\destination_directory"
         state: directory
-      become: yes
